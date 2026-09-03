@@ -7,13 +7,13 @@
 <meta name="description" content="Links to our latest writing, events, and channels.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #eeebe2;
-    --ink: #1c1a17;
-    --red: #d6402a;
-    --yellow: #e8ae34;
+    --yellow: #fade2a;
+    --ink: #232323;
+    --red: #e0364f;
+    --teal: #1fb6a4;
     --white: #ffffff;
     --border-width: 3px;
   }
@@ -23,12 +23,12 @@
   html, body {
     margin: 0;
     padding: 0;
-    background: var(--paper);
+    background: var(--yellow);
     color: var(--ink);
   }
 
   body {
-    font-family: 'Archivo', sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     -webkit-font-smoothing: antialiased;
@@ -36,148 +36,176 @@
 
   main {
     width: 100%;
-    max-width: 480px;
+    max-width: 560px;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    padding: 1.5rem 1.25rem 2.5rem;
   }
 
   /* ---- Masthead ---- */
 
   .masthead {
-    background: var(--red);
-    color: var(--white);
-    padding: 2rem 1.5rem 1.75rem;
     text-align: center;
+    padding-bottom: 1.5rem;
   }
 
-  .mark {
-    width: 56px;
-    height: 56px;
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     margin: 0 auto 1rem;
+    display: block;
   }
 
   .org-name {
-    font-family: 'Anton', sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    font-size: clamp(1.9rem, 8vw, 2.4rem);
-    line-height: 1;
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  .org-subtitle {
-    font-family: 'Archivo', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
-    margin: 0.4rem 0 0;
-    opacity: 0.92;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 6vw, 1.75rem);
+    line-height: 1.2;
+    margin: 0 0 0.6rem;
   }
 
   .org-tagline {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     line-height: 1.5;
-    max-width: 32ch;
-    margin: 0.9rem auto 0;
-    opacity: 0.92;
+    max-width: 34ch;
+    margin: 0 auto 1.1rem;
   }
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 1.1rem;
+  }
+
+  .socials a {
+    color: var(--ink);
+    display: block;
+    line-height: 0;
+  }
+
+  .socials svg { width: 22px; height: 22px; }
 
   /* ---- Standing links ---- */
 
   .links {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    padding: 1.5rem 1.5rem 0.5rem;
+    gap: 0.7rem;
+    padding-bottom: 1.75rem;
   }
 
-  .link-button {
+  .pill {
     display: block;
     text-align: center;
     text-decoration: none;
-    color: var(--ink);
-    background: var(--white);
-    border: var(--border-width) solid var(--ink);
-    padding: 0.85rem 1rem;
+    color: var(--white);
+    background: var(--red);
+    border-radius: 999px;
+    padding: 0.9rem 1.25rem;
     font-weight: 700;
-    font-size: 1rem;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    font-size: 0.95rem;
+    transition: filter 0.15s ease;
   }
 
-  .link-button:hover,
-  .link-button:focus-visible {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .link-button:focus-visible {
-    outline: 3px solid var(--yellow);
-    outline-offset: 2px;
-  }
+  .pill:hover, .pill:focus-visible { filter: brightness(0.92); }
+  .pill:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
   /* ---- Section label ---- */
 
   .section-label {
-    padding: 1.75rem 1.5rem 0.75rem;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
   }
 
-  /* ---- Grid ---- */
+  /* ---- Cards ---- */
 
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    background: var(--ink);
-    padding: 0 0 2px;
-    flex: 1;
-  }
-
-  .tile {
+  .card {
     display: block;
     text-decoration: none;
-    color: var(--ink);
-    background: var(--paper);
+    color: inherit;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 1rem;
   }
 
-  .tile-image-wrap {
-    aspect-ratio: 1 / 1;
+  .card-photo-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 8px;
     overflow: hidden;
-    background: var(--white);
-    border-bottom: var(--border-width) solid var(--ink);
+    background: rgba(255,255,255,0.25);
   }
 
-  .tile-image-wrap img {
+  .card.hero .card-photo-wrap { aspect-ratio: 4 / 3; }
+
+  .card-photo-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.2s ease;
   }
 
-  .tile:hover .tile-image-wrap img,
-  .tile:focus-visible .tile-image-wrap img {
-    opacity: 0.85;
+  .card:hover .card-photo-wrap img,
+  .card:focus-visible .card-photo-wrap img { transform: scale(1.03); }
+
+  .card:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+  .card-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0) 65%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
   }
 
-  .tile:focus-visible {
-    outline: 3px solid var(--yellow);
-    outline-offset: -3px;
+  .card-date {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
   }
 
-  .tile-title {
-    font-weight: 600;
-    font-size: 0.85rem;
-    line-height: 1.3;
-    padding: 0.6rem 0.7rem 0.8rem;
+  .card-title {
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1.25;
     margin: 0;
+    font-size: 1rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
+
+  .card.hero .card-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.4rem;
+  }
+
+  /* card frame color rotation */
+  .card.frame-red   { background: var(--red); }
+  .card.frame-teal   { background: var(--teal); }
+  .card.frame-ink    { background: var(--ink); }
+  .card.frame-yellow { background: #d4a017; }
 
   /* ---- Empty state ---- */
 
   .empty-state {
+    background: var(--white);
+    border-radius: 14px;
     padding: 2.5rem 1.5rem;
     text-align: center;
   }
@@ -192,22 +220,17 @@
   /* ---- Footer ---- */
 
   footer {
-    padding: 1.25rem 1.5rem 2rem;
+    padding-top: 0.5rem;
     text-align: center;
     font-size: 0.75rem;
     color: var(--ink);
     opacity: 0.65;
   }
 
-  footer a {
-    color: inherit;
-  }
+  footer a { color: inherit; }
 
   @media (prefers-reduced-motion: reduce) {
-    .link-button,
-    .tile-image-wrap img {
-      transition: none;
-    }
+    .pill, .card-photo-wrap img { transition: none; }
   }
 </style>
 </head>
@@ -215,26 +238,41 @@
 <main>
 
   <header class="masthead">
-    <svg class="mark" viewBox="0 0 56 56" aria-hidden="true">
-      <circle cx="28" cy="28" r="27" fill="none" stroke="#ffffff" stroke-width="2"/>
-      <rect x="14" y="24" width="28" height="8" fill="#ffffff"/>
-    </svg>
-    <h1 class="org-name">Rosa Luxemburg<br>Stiftung</h1>
-    <p class="org-subtitle">New York Office</p>
-    <p class="org-tagline">Political education on the US, the UN, and global solidarity.</p>
+    <img class="avatar" src="https://buffer-start-page-uploads.s3.amazonaws.com/67354bc1ceb0c1e989a2ccb6/1731546232040.RLS%20NYC%20PROFILE%20PIC.png" alt="Rosa Luxemburg Stiftung — New York Office" width="88" height="88">
+    <h1 class="org-name">Rosa Lux NYC</h1>
+    <p class="org-tagline">New York Office of Rosa Luxemburg Stiftung, focusing on the US and Canada, the United Nations, and Global South perspectives.</p>
+    <nav class="socials" aria-label="Social channels">
+      <a href="https://twitter.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.6L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.5H16l.4-3.1h-2.9V8.4c0-.9.3-1.6 1.7-1.6h1.8V4c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.9H7.4v3.1H10V22h3.5z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/rosaluxnyc/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c2.7 0 3 0 4 .05 1 .05 1.7.2 2.3.5.6.2 1.1.6 1.6 1.1.5.5.8 1 1.1 1.6.2.6.4 1.3.5 2.3.05 1 .05 1.3.05 4s0 3-.05 4c-.05 1-.2 1.7-.5 2.3-.2.6-.6 1.1-1.1 1.6-.5.5-1 .8-1.6 1.1-.6.2-1.3.4-2.3.5-1 .05-1.3.05-4 .05s-3 0-4-.05c-1-.05-1.7-.2-2.3-.5-.6-.2-1.1-.6-1.6-1.1-.5-.5-.8-1-1.1-1.6-.2-.6-.4-1.3-.5-2.3-.05-1-.05-1.3-.05-4s0-3 .05-4c.05-1 .2-1.7.5-2.3.2-.6.6-1.1 1.1-1.6.5-.5 1-.8 1.6-1.1.6-.2 1.3-.4 2.3-.5 1-.05 1.3-.05 4-.05zm0 1.8c-2.6 0-2.9 0-4 .05-.8.04-1.3.16-1.6.28-.4.15-.7.34-1 .63-.3.3-.48.6-.63 1-.12.3-.24.8-.28 1.6-.05 1.1-.05 1.4-.05 4s0 2.9.05 4c.04.8.16 1.3.28 1.6.15.4.34.7.63 1 .3.3.6.48 1 .63.3.12.8.24 1.6.28 1.1.05 1.4.05 4 .05s2.9 0 4-.05c.8-.04 1.3-.16 1.6-.28.4-.15.7-.34 1-.63.3-.3.48-.6.63-1 .12-.3.24-.8.28-1.6.05-1.1.05-1.4.05-4s0-2.9-.05-4c-.04-.8-.16-1.3-.28-1.6-.15-.4-.34-.7-.63-1-.3-.3-.6-.48-1-.63-.3-.12-.8-.24-1.6-.28-1.1-.05-1.4-.05-4-.05zm0 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.8a2.7 2.7 0 100 5.4 2.7 2.7 0 000-5.4zm4.7-2a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/c/rosaluxnyc" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 6.2a2.8 2.8 0 00-2-2C18.7 3.7 12 3.7 12 3.7s-6.7 0-8.5.5a2.8 2.8 0 00-2 2A29 29 0 001 12a29 29 0 00.5 5.8 2.8 2.8 0 002 2c1.8.5 8.5.5 8.5.5s6.7 0 8.5-.5a2.8 2.8 0 002-2A29 29 0 0023 12a29 29 0 00-.5-5.8zM9.8 15.5V8.5l6 3.5-6 3.5z"/></svg>
+      </a>
+    </nav>
   </header>
 
-  <nav class="links" aria-label="Main links">
-    <a class="link-button" href="https://rosalux.nyc" target="_blank" rel="noopener">Read our latest at rosalux.nyc</a>
-    <a class="link-button" href="https://bsky.app/profile/rosaluxnyc.bsky.social" target="_blank" rel="noopener">Follow us on Bluesky</a>
-    <!-- Add the Substack link here once it launches:
-    <a class="link-button" href="https://rosaluxnyc.substack.com" target="_blank" rel="noopener">Subscribe on Substack</a>
-    -->
+  <nav class="links" aria-label="Quick links">
+    <a class="pill" href="https://rosalux.nyc/" target="_blank" rel="noopener">Our Website →</a>
+    <a class="pill" href="https://rosalux.nyc/events/" target="_blank" rel="noopener">Upcoming Events</a>
+    <a class="pill" href="https://us.macmillan.com/books/9780374298432/fromlifeitself/" target="_blank" rel="noopener">Order "From Life Itself"</a>
   </nav>
 
-  <h2 class="section-label">Latest</h2>
+  <div id="hero-slot"></div>
 
-  <div id="grid" class="grid" role="list"></div>
+  <div class="section-label">Recent Articles</div>
+
+  <div id="grid"></div>
+
+  <nav class="links" aria-label="More links">
+    <a class="pill" href="https://rosalux.nyc/resources/" target="_blank" rel="noopener">All Articles, Publications &amp; Multimedia</a>
+    <a class="pill" href="https://rosalux-nyc.us5.list-manage.com/subscribe" target="_blank" rel="noopener">Subscribe to our Newsletter</a>
+  </nav>
 
   <footer>
     Updated automatically &middot; <a href="https://rosalux.nyc" target="_blank" rel="noopener">rosalux.nyc</a>
@@ -243,7 +281,31 @@
 </main>
 
 <script>
+  const FRAMES = ['frame-red', 'frame-teal', 'frame-ink', 'frame-yellow'];
+
+  function formatDate(iso) {
+    const d = new Date(iso + 'T00:00:00');
+    if (isNaN(d)) return '';
+    return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function cardHTML(item, index, isHero) {
+    const frame = FRAMES[index % FRAMES.length];
+    return `
+      <a class="card ${isHero ? 'hero' : ''} ${frame}" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">
+        <div class="card-photo-wrap">
+          <img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.title)}" loading="${isHero ? 'eager' : 'lazy'}" decoding="async" onerror="this.remove()">
+          <div class="card-scrim">
+            <span class="card-date">${escapeHtml(formatDate(item.date))}</span>
+            <p class="card-title">${escapeHtml(item.title)}</p>
+          </div>
+        </div>
+      </a>
+    `;
+  }
+
   async function loadGrid() {
+    const heroSlot = document.getElementById('hero-slot');
     const grid = document.getElementById('grid');
     try {
       const response = await fetch('./linkinbio.json', { cache: 'no-store' });
@@ -251,26 +313,22 @@
       const items = await response.json();
 
       if (!Array.isArray(items) || items.length === 0) {
-        renderEmptyState(grid);
+        renderEmptyState(heroSlot, grid);
         return;
       }
 
-      grid.innerHTML = items.map(item => `
-        <a class="tile" role="listitem" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">
-          <div class="tile-image-wrap">
-            <img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.title)}" loading="lazy">
-          </div>
-          <p class="tile-title">${escapeHtml(item.title)}</p>
-        </a>
-      `).join('');
+      const [hero, ...rest] = items;
+      heroSlot.innerHTML = cardHTML(hero, 0, true);
+      grid.innerHTML = rest.map((item, i) => cardHTML(item, i + 1, false)).join('');
     } catch (err) {
-      renderEmptyState(grid);
+      renderEmptyState(heroSlot, grid);
     }
   }
 
-  function renderEmptyState(grid) {
+  function renderEmptyState(heroSlot, grid) {
+    heroSlot.innerHTML = '';
     grid.outerHTML = `
-      <div class="empty-state">
+      <div class="empty-state" id="grid">
         <p>Nothing posted yet. Check back soon, or head to rosalux.nyc for everything we've published.</p>
       </div>
     `;
