@@ -7,15 +7,15 @@
 <meta name="description" content="Links to our latest writing, events, and channels.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --yellow: #fade2a;
-    --ink: #232323;
+    --bg: #171313;
+    --surface: #211c1c;
+    --text: #e6e6e6;
+    --text-dim: #9a9490;
     --red: #e0364f;
-    --teal: #1fb6a4;
-    --white: #ffffff;
-    --border-width: 3px;
+    --border: rgba(255,255,255,0.1);
   }
 
   * { box-sizing: border-box; }
@@ -23,12 +23,12 @@
   html, body {
     margin: 0;
     padding: 0;
-    background: var(--yellow);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--text);
   }
 
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     display: flex;
     justify-content: center;
     -webkit-font-smoothing: antialiased;
@@ -38,63 +38,67 @@
     width: 100%;
     max-width: 560px;
     min-height: 100vh;
-    padding: 1.5rem 1.25rem 2.5rem;
+    padding: 2rem 1.25rem 2.5rem;
   }
 
   /* ---- Masthead ---- */
 
   .masthead {
     text-align: center;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.75rem;
   }
 
   .avatar {
-    width: 88px;
-    height: 88px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--white);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    margin: 0 auto 1rem;
+    border: 2px solid var(--border);
+    margin: 0 auto 1.1rem;
     display: block;
   }
 
   .org-name {
-    font-family: 'Libre Baskerville', serif;
-    font-weight: 700;
-    font-size: clamp(1.5rem, 6vw, 1.75rem);
-    line-height: 1.2;
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
     margin: 0 0 0.6rem;
+    color: var(--text);
   }
 
   .org-tagline {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    max-width: 34ch;
-    margin: 0 auto 1.1rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--text-dim);
+    max-width: 36ch;
+    margin: 0 auto 1.25rem;
   }
 
   .socials {
     display: flex;
     justify-content: center;
-    gap: 1.1rem;
+    gap: 1.3rem;
   }
 
   .socials a {
-    color: var(--ink);
+    color: var(--text-dim);
     display: block;
     line-height: 0;
+    transition: color 0.15s ease;
   }
 
-  .socials svg { width: 22px; height: 22px; }
+  .socials a:hover, .socials a:focus-visible { color: var(--text); }
+
+  .socials svg { width: 19px; height: 19px; }
 
   /* ---- Standing links ---- */
 
   .links {
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
-    padding-bottom: 1.75rem;
+    gap: 0.6rem;
+    padding-bottom: 2rem;
   }
 
   .links-row {
@@ -104,8 +108,8 @@
 
   .links-row .pill {
     flex: 1 1 0;
-    padding: 0.65rem 0.4rem;
-    font-size: 0.8rem;
+    padding: 0.6rem 0.4rem;
+    font-size: 0.78rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -115,152 +119,121 @@
     display: block;
     text-align: center;
     text-decoration: none;
-    color: var(--white);
-    background: var(--red);
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 0.9rem 1.25rem;
-    font-weight: 700;
-    font-size: 0.95rem;
-    transition: filter 0.15s ease;
+    padding: 0.8rem 1.25rem;
+    font-weight: 500;
+    font-size: 0.88rem;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
   }
 
-  .pill:hover, .pill:focus-visible { filter: brightness(0.92); }
-  .pill:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  .pill:hover, .pill:focus-visible {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.28);
+  }
+
+  .pill:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
   /* ---- Section label ---- */
 
   .section-label {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 1.4rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.85rem;
     margin-bottom: 1rem;
   }
 
   /* ---- Cards ---- */
 
-  .card {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 14px;
-    padding: 14px;
-    margin-bottom: 1rem;
-  }
-
   #grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.65rem;
+    gap: 0.5rem;
     container-type: inline-size;
     container-name: card-grid;
   }
 
-  #grid .card {
-    padding: 7px;
-    border-radius: 12px;
-    margin-bottom: 0;
+  .card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
   }
+
+  .card:hover .card-photo-wrap img,
+  .card:focus-visible .card-photo-wrap img { transform: scale(1.04); }
+
+  .card:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
   .card-photo-wrap {
     position: relative;
-    aspect-ratio: 4 / 5;
-    border-radius: 8px;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    background: rgba(255,255,255,0.25);
+    background: var(--surface);
   }
-
-  .card.hero .card-photo-wrap { aspect-ratio: 4 / 3; }
-
-  #grid .card-photo-wrap { aspect-ratio: 1 / 1; border-radius: 7px; }
 
   .card-photo-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.2s ease;
+    transition: transform 0.25s ease;
   }
-
-  .card:hover .card-photo-wrap img,
-  .card:focus-visible .card-photo-wrap img { transform: scale(1.03); }
-
-  .card:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
   .card-scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0) 65%);
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 62%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1rem;
+    padding: clamp(0.5rem, 2.4cqi, 0.7rem);
   }
 
   .card-date {
-    display: inline-block;
-    align-self: flex-start;
-    background: var(--white);
-    color: var(--ink);
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    margin-bottom: 0.6rem;
+    font-size: clamp(0.56rem, 2.4cqi, 0.64rem);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
   }
 
   .card-title {
-    color: var(--white);
-    font-weight: 700;
-    line-height: 1.25;
-    margin: 0;
-    font-size: 1rem;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  }
-
-  .card.hero .card-title {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 1.4rem;
-  }
-
-  #grid .card-scrim { padding: clamp(0.5rem, 2.4cqi, 0.7rem); }
-
-  #grid .card-date {
-    font-size: clamp(0.56rem, 2.6cqi, 0.66rem);
-    padding: 0.12rem 0.4rem;
-    margin-bottom: 0.35rem;
-  }
-
-  #grid .card-title {
-    font-size: clamp(0.72rem, 3.4cqi, 0.85rem);
+    color: var(--text);
+    font-weight: 500;
     line-height: 1.3;
     letter-spacing: -0.005em;
+    margin: 0;
+    font-size: clamp(0.72rem, 3.4cqi, 0.85rem);
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  /* card frame color rotation */
-  .card.frame-red   { background: var(--red); }
-  .card.frame-teal   { background: var(--teal); }
-  .card.frame-ink    { background: var(--ink); }
-  .card.frame-yellow { background: #d4a017; }
-
   /* ---- Empty state ---- */
 
   .empty-state {
-    background: var(--white);
-    border-radius: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
     padding: 2.5rem 1.5rem;
     text-align: center;
   }
 
   .empty-state p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.5;
+    color: var(--text-dim);
     max-width: 30ch;
     margin: 0 auto;
   }
@@ -268,17 +241,16 @@
   /* ---- Footer ---- */
 
   footer {
-    padding-top: 0.5rem;
+    padding-top: 1.75rem;
     text-align: center;
     font-size: 0.75rem;
-    color: var(--ink);
-    opacity: 0.65;
+    color: var(--text-dim);
   }
 
   footer a { color: inherit; }
 
   @media (prefers-reduced-motion: reduce) {
-    .pill, .card-photo-wrap img { transition: none; }
+    .pill, .card-photo-wrap img, .socials a { transition: none; }
   }
 </style>
 </head>
@@ -286,7 +258,7 @@
 <main>
 
   <header class="masthead">
-    <img class="avatar" src="https://buffer-start-page-uploads.s3.amazonaws.com/67354bc1ceb0c1e989a2ccb6/1731546232040.RLS%20NYC%20PROFILE%20PIC.png" alt="Rosa Luxemburg Stiftung — New York Office" width="88" height="88">
+    <img class="avatar" src="https://buffer-start-page-uploads.s3.amazonaws.com/67354bc1ceb0c1e989a2ccb6/1731546232040.RLS%20NYC%20PROFILE%20PIC.png" alt="Rosa Luxemburg Stiftung — New York Office" width="72" height="72">
     <h1 class="org-name">Rosa Lux NYC</h1>
     <p class="org-tagline">New York Office of Rosa Luxemburg Stiftung, focusing on the US and Canada, the United Nations, and Global South perspectives.</p>
     <nav class="socials" aria-label="Social channels">
@@ -311,13 +283,11 @@
     <a class="pill" href="https://us.macmillan.com/books/9780374298432/fromlifeitself/" target="_blank" rel="noopener">Buy the Book</a>
   </nav>
 
-  <div id="hero-slot"></div>
-
   <div class="section-label">Recent Articles</div>
 
   <div id="grid"></div>
 
-  <nav class="links" aria-label="More links">
+  <nav class="links" aria-label="More links" style="padding-top: 1.5rem;">
     <a class="pill" href="https://rosalux.nyc/resources/" target="_blank" rel="noopener">All Articles, Publications &amp; Multimedia</a>
     <a class="pill" href="https://rosalux-nyc.us5.list-manage.com/subscribe" target="_blank" rel="noopener">Subscribe to our Newsletter</a>
   </nav>
@@ -329,20 +299,17 @@
 </main>
 
 <script>
-  const FRAMES = ['frame-red', 'frame-teal', 'frame-ink', 'frame-yellow'];
-
   function formatDate(iso) {
     const d = new Date(iso + 'T00:00:00');
     if (isNaN(d)) return '';
     return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
   }
 
-  function cardHTML(item, index, isHero) {
-    const frame = FRAMES[index % FRAMES.length];
+  function cardHTML(item, isEager) {
     return `
-      <a class="card ${isHero ? 'hero' : ''} ${frame}" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">
+      <a class="card" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">
         <div class="card-photo-wrap">
-          <img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.title)}" loading="${isHero ? 'eager' : 'lazy'}" decoding="async" onerror="this.remove()">
+          <img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.title)}" loading="${isEager ? 'eager' : 'lazy'}" decoding="async" onerror="this.remove()">
           <div class="card-scrim">
             <span class="card-date">${escapeHtml(formatDate(item.date))}</span>
             <p class="card-title">${escapeHtml(item.title)}</p>
@@ -353,7 +320,6 @@
   }
 
   async function loadGrid() {
-    const heroSlot = document.getElementById('hero-slot');
     const grid = document.getElementById('grid');
     try {
       const response = await fetch('./linkinbio.json', { cache: 'no-store' });
@@ -361,20 +327,17 @@
       const items = await response.json();
 
       if (!Array.isArray(items) || items.length === 0) {
-        renderEmptyState(heroSlot, grid);
+        renderEmptyState(grid);
         return;
       }
 
-      const [hero, ...rest] = items;
-      heroSlot.innerHTML = cardHTML(hero, 0, true);
-      grid.innerHTML = rest.map((item, i) => cardHTML(item, i + 1, false)).join('');
+      grid.innerHTML = items.map((item, i) => cardHTML(item, i < 2)).join('');
     } catch (err) {
-      renderEmptyState(heroSlot, grid);
+      renderEmptyState(grid);
     }
   }
 
-  function renderEmptyState(heroSlot, grid) {
-    heroSlot.innerHTML = '';
+  function renderEmptyState(grid) {
     grid.outerHTML = `
       <div class="empty-state" id="grid">
         <p>Nothing posted yet. Check back soon, or head to rosalux.nyc for everything we've published.</p>
