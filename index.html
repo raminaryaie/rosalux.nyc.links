@@ -154,6 +154,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.65rem;
+    container-type: inline-size;
+    container-name: card-grid;
   }
 
   #grid .card {
@@ -223,17 +225,18 @@
     font-size: 1.4rem;
   }
 
-  #grid .card-scrim { padding: 0.55rem; }
+  #grid .card-scrim { padding: clamp(0.5rem, 2.4cqi, 0.7rem); }
 
   #grid .card-date {
-    font-size: 0.58rem;
+    font-size: clamp(0.56rem, 2.6cqi, 0.66rem);
     padding: 0.12rem 0.4rem;
     margin-bottom: 0.35rem;
   }
 
   #grid .card-title {
-    font-size: 0.72rem;
-    line-height: 1.2;
+    font-size: clamp(0.72rem, 3.4cqi, 0.85rem);
+    line-height: 1.3;
+    letter-spacing: -0.005em;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
