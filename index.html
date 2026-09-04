@@ -97,6 +97,20 @@
     padding-bottom: 1.75rem;
   }
 
+  .links-row {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .links-row .pill {
+    flex: 1 1 0;
+    padding: 0.65rem 0.4rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .pill {
     display: block;
     text-align: center;
@@ -136,6 +150,18 @@
     margin-bottom: 1rem;
   }
 
+  #grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  #grid .card {
+    padding: 7px;
+    border-radius: 12px;
+    margin-bottom: 0;
+  }
+
   .card-photo-wrap {
     position: relative;
     aspect-ratio: 4 / 5;
@@ -145,6 +171,8 @@
   }
 
   .card.hero .card-photo-wrap { aspect-ratio: 4 / 3; }
+
+  #grid .card-photo-wrap { aspect-ratio: 1 / 1; border-radius: 7px; }
 
   .card-photo-wrap img {
     width: 100%;
@@ -193,6 +221,23 @@
   .card.hero .card-title {
     font-family: 'Libre Baskerville', serif;
     font-size: 1.4rem;
+  }
+
+  #grid .card-scrim { padding: 0.55rem; }
+
+  #grid .card-date {
+    font-size: 0.58rem;
+    padding: 0.12rem 0.4rem;
+    margin-bottom: 0.35rem;
+  }
+
+  #grid .card-title {
+    font-size: 0.72rem;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   /* card frame color rotation */
@@ -257,10 +302,10 @@
     </nav>
   </header>
 
-  <nav class="links" aria-label="Quick links">
-    <a class="pill" href="https://rosalux.nyc/" target="_blank" rel="noopener">Our Website →</a>
-    <a class="pill" href="https://rosalux.nyc/events/" target="_blank" rel="noopener">Upcoming Events</a>
-    <a class="pill" href="https://us.macmillan.com/books/9780374298432/fromlifeitself/" target="_blank" rel="noopener">Order "From Life Itself"</a>
+  <nav class="links links-row" aria-label="Quick links">
+    <a class="pill" href="https://rosalux.nyc/" target="_blank" rel="noopener">Website →</a>
+    <a class="pill" href="https://rosalux.nyc/events/" target="_blank" rel="noopener">Events</a>
+    <a class="pill" href="https://us.macmillan.com/books/9780374298432/fromlifeitself/" target="_blank" rel="noopener">Buy the Book</a>
   </nav>
 
   <div id="hero-slot"></div>
