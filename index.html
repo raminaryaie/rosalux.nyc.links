@@ -192,7 +192,7 @@
   .card-scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0) 62%);
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.7) 22%, rgba(0,0,0,0.12) 48%, rgba(0,0,0,0) 60%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -200,20 +200,26 @@
   }
 
   .card-date {
-    font-size: clamp(0.56rem, 2.4cqi, 0.64rem);
-    font-weight: 500;
+    display: inline-block;
+    align-self: flex-start;
+    background: rgba(0,0,0,0.55);
+    font-size: clamp(0.6rem, 2.6cqi, 0.7rem);
+    font-weight: 600;
     letter-spacing: 0.02em;
-    color: var(--text-dim);
-    margin-bottom: 0.3rem;
+    color: var(--text);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    margin-bottom: 0.4rem;
   }
 
   .card-title {
     color: var(--text);
-    font-weight: 500;
-    line-height: 1.3;
+    font-weight: 600;
+    line-height: 1.32;
     letter-spacing: -0.005em;
     margin: 0;
-    font-size: clamp(0.72rem, 3.4cqi, 0.85rem);
+    font-size: clamp(0.82rem, 3.8cqi, 1rem);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -252,50 +258,99 @@
   @media (prefers-reduced-motion: reduce) {
     .pill, .card-photo-wrap img, .socials a { transition: none; }
   }
+
+  /* ---- Desktop: sidebar layout ---- */
+
+  @media (min-width: 860px) {
+    main {
+      max-width: 1080px;
+      padding: 3.5rem 2.5rem;
+    }
+
+    .layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 3.5rem;
+    }
+
+    .sidebar {
+      flex: 0 0 300px;
+      position: sticky;
+      top: 3.5rem;
+    }
+
+    .content { flex: 1; min-width: 0; }
+
+    .masthead { text-align: left; padding-bottom: 2rem; }
+    .avatar { margin: 0 0 1.2rem; }
+    .org-tagline { margin: 0 0 1.4rem; }
+    .socials { justify-content: flex-start; }
+
+    .links-row {
+      flex-direction: column;
+      padding-bottom: 0;
+    }
+
+    .links-row .pill {
+      white-space: normal;
+      text-align: left;
+      padding: 0.75rem 1.1rem;
+      font-size: 0.85rem;
+    }
+
+    #grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+  }
 </style>
 </head>
 <body>
 <main>
 
-  <header class="masthead">
-    <img class="avatar" src="https://buffer-start-page-uploads.s3.amazonaws.com/67354bc1ceb0c1e989a2ccb6/1731546232040.RLS%20NYC%20PROFILE%20PIC.png" alt="Rosa Luxemburg Stiftung — New York Office" width="72" height="72">
-    <h1 class="org-name">Rosa Lux NYC</h1>
-    <p class="org-tagline">New York Office of Rosa Luxemburg Stiftung, focusing on the US and Canada, the United Nations, and Global South perspectives.</p>
-    <nav class="socials" aria-label="Social channels">
-      <a href="https://twitter.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="X (Twitter)">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.6L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg>
-      </a>
-      <a href="https://www.facebook.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.5H16l.4-3.1h-2.9V8.4c0-.9.3-1.6 1.7-1.6h1.8V4c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.9H7.4v3.1H10V22h3.5z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/rosaluxnyc/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c2.7 0 3 0 4 .05 1 .05 1.7.2 2.3.5.6.2 1.1.6 1.6 1.1.5.5.8 1 1.1 1.6.2.6.4 1.3.5 2.3.05 1 .05 1.3.05 4s0 3-.05 4c-.05 1-.2 1.7-.5 2.3-.2.6-.6 1.1-1.1 1.6-.5.5-1 .8-1.6 1.1-.6.2-1.3.4-2.3.5-1 .05-1.3.05-4 .05s-3 0-4-.05c-1-.05-1.7-.2-2.3-.5-.6-.2-1.1-.6-1.6-1.1-.5-.5-.8-1-1.1-1.6-.2-.6-.4-1.3-.5-2.3-.05-1-.05-1.3-.05-4s0-3 .05-4c.05-1 .2-1.7.5-2.3.2-.6.6-1.1 1.1-1.6.5-.5 1-.8 1.6-1.1.6-.2 1.3-.4 2.3-.5 1-.05 1.3-.05 4-.05zm0 1.8c-2.6 0-2.9 0-4 .05-.8.04-1.3.16-1.6.28-.4.15-.7.34-1 .63-.3.3-.48.6-.63 1-.12.3-.24.8-.28 1.6-.05 1.1-.05 1.4-.05 4s0 2.9.05 4c.04.8.16 1.3.28 1.6.15.4.34.7.63 1 .3.3.6.48 1 .63.3.12.8.24 1.6.28 1.1.05 1.4.05 4 .05s2.9 0 4-.05c.8-.04 1.3-.16 1.6-.28.4-.15.7-.34 1-.63.3-.3.48-.6.63-1 .12-.3.24-.8.28-1.6.05-1.1.05-1.4.05-4s0-2.9-.05-4c-.04-.8-.16-1.3-.28-1.6-.15-.4-.34-.7-.63-1-.3-.3-.6-.48-1-.63-.3-.12-.8-.24-1.6-.28-1.1-.05-1.4-.05-4-.05zm0 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.8a2.7 2.7 0 100 5.4 2.7 2.7 0 000-5.4zm4.7-2a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg>
-      </a>
-      <a href="https://www.youtube.com/c/rosaluxnyc" target="_blank" rel="noopener" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 6.2a2.8 2.8 0 00-2-2C18.7 3.7 12 3.7 12 3.7s-6.7 0-8.5.5a2.8 2.8 0 00-2 2A29 29 0 001 12a29 29 0 00.5 5.8 2.8 2.8 0 002 2c1.8.5 8.5.5 8.5.5s6.7 0 8.5-.5a2.8 2.8 0 002-2A29 29 0 0023 12a29 29 0 00-.5-5.8zM9.8 15.5V8.5l6 3.5-6 3.5z"/></svg>
-      </a>
-    </nav>
-  </header>
+  <div class="layout">
 
-  <nav class="links links-row" aria-label="Quick links">
-    <a class="pill" href="https://rosalux.nyc/" target="_blank" rel="noopener">Website →</a>
-    <a class="pill" href="https://rosalux.nyc/events/" target="_blank" rel="noopener">Events</a>
-    <a class="pill" href="https://us.macmillan.com/books/9780374298432/fromlifeitself/" target="_blank" rel="noopener">Buy the Book</a>
-  </nav>
+    <aside class="sidebar">
+      <header class="masthead">
+        <img class="avatar" src="https://buffer-start-page-uploads.s3.amazonaws.com/67354bc1ceb0c1e989a2ccb6/1731546232040.RLS%20NYC%20PROFILE%20PIC.png" alt="Rosa Luxemburg Stiftung — New York Office" width="72" height="72">
+        <h1 class="org-name">Rosa Lux NYC</h1>
+        <p class="org-tagline">New York Office of Rosa Luxemburg Stiftung, focusing on the US and Canada, the United Nations, and Global South perspectives.</p>
+        <nav class="socials" aria-label="Social channels">
+          <a href="https://twitter.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.6L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.5H16l.4-3.1h-2.9V8.4c0-.9.3-1.6 1.7-1.6h1.8V4c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.9H7.4v3.1H10V22h3.5z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/rosaluxnyc/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c2.7 0 3 0 4 .05 1 .05 1.7.2 2.3.5.6.2 1.1.6 1.6 1.1.5.5.8 1 1.1 1.6.2.6.4 1.3.5 2.3.05 1 .05 1.3.05 4s0 3-.05 4c-.05 1-.2 1.7-.5 2.3-.2.6-.6 1.1-1.1 1.6-.5.5-1 .8-1.6 1.1-.6.2-1.3.4-2.3.5-1 .05-1.3.05-4 .05s-3 0-4-.05c-1-.05-1.7-.2-2.3-.5-.6-.2-1.1-.6-1.6-1.1-.5-.5-.8-1-1.1-1.6-.2-.6-.4-1.3-.5-2.3-.05-1-.05-1.3-.05-4s0-3 .05-4c.05-1 .2-1.7.5-2.3.2-.6.6-1.1 1.1-1.6.5-.5 1-.8 1.6-1.1.6-.2 1.3-.4 2.3-.5 1-.05 1.3-.05 4-.05zm0 1.8c-2.6 0-2.9 0-4 .05-.8.04-1.3.16-1.6.28-.4.15-.7.34-1 .63-.3.3-.48.6-.63 1-.12.3-.24.8-.28 1.6-.05 1.1-.05 1.4-.05 4s0 2.9.05 4c.04.8.16 1.3.28 1.6.15.4.34.7.63 1 .3.3.6.48 1 .63.3.12.8.24 1.6.28 1.1.05 1.4.05 4 .05s2.9 0 4-.05c.8-.04 1.3-.16 1.6-.28.4-.15.7-.34 1-.63.3-.3.48-.6.63-1 .12-.3.24-.8.28-1.6.05-1.1.05-1.4.05-4s0-2.9-.05-4c-.04-.8-.16-1.3-.28-1.6-.15-.4-.34-.7-.63-1-.3-.3-.6-.48-1-.63-.3-.12-.8-.24-1.6-.28-1.1-.05-1.4-.05-4-.05zm0 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.8a2.7 2.7 0 100 5.4 2.7 2.7 0 000-5.4zm4.7-2a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/c/rosaluxnyc" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 6.2a2.8 2.8 0 00-2-2C18.7 3.7 12 3.7 12 3.7s-6.7 0-8.5.5a2.8 2.8 0 00-2 2A29 29 0 001 12a29 29 0 00.5 5.8 2.8 2.8 0 002 2c1.8.5 8.5.5 8.5.5s6.7 0 8.5-.5a2.8 2.8 0 002-2A29 29 0 0023 12a29 29 0 00-.5-5.8zM9.8 15.5V8.5l6 3.5-6 3.5z"/></svg>
+          </a>
+        </nav>
+      </header>
 
-  <div class="section-label">Recent Articles</div>
+      <nav class="links links-row" aria-label="Quick links">
+        <a class="pill" href="https://rosalux.nyc/" target="_blank" rel="noopener">Website →</a>
+        <a class="pill" href="https://rosalux.nyc/events/" target="_blank" rel="noopener">Events</a>
+        <a class="pill" href="https://us.macmillan.com/books/9780374298432/fromlifeitself/" target="_blank" rel="noopener">Buy the Book</a>
+      </nav>
+    </aside>
 
-  <div id="grid"></div>
+    <div class="content">
+      <div class="section-label">Recent Articles</div>
 
-  <nav class="links" aria-label="More links" style="padding-top: 1.5rem;">
-    <a class="pill" href="https://rosalux.nyc/resources/" target="_blank" rel="noopener">All Articles, Publications &amp; Multimedia</a>
-    <a class="pill" href="https://rosalux-nyc.us5.list-manage.com/subscribe" target="_blank" rel="noopener">Subscribe to our Newsletter</a>
-  </nav>
+      <div id="grid"></div>
 
-  <footer>
-    Updated automatically &middot; <a href="https://rosalux.nyc" target="_blank" rel="noopener">rosalux.nyc</a>
-  </footer>
+      <nav class="links" aria-label="More links" style="padding-top: 1.5rem;">
+        <a class="pill" href="https://rosalux.nyc/resources/" target="_blank" rel="noopener">All Articles, Publications &amp; Multimedia</a>
+        <a class="pill" href="https://rosalux-nyc.us5.list-manage.com/subscribe" target="_blank" rel="noopener">Subscribe to our Newsletter</a>
+      </nav>
 
+      <footer>
+        Updated automatically &middot; <a href="https://rosalux.nyc" target="_blank" rel="noopener">rosalux.nyc</a>
+      </footer>
+    </div>
+
+  </div>
 </main>
 
 <script>
