@@ -20,6 +20,8 @@
 
   * { box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
   html, body {
     margin: 0;
     padding: 0;
@@ -226,6 +228,98 @@
     overflow: hidden;
   }
 
+  .card-text {
+    padding: clamp(0.55rem, 2.6cqi, 0.75rem);
+  }
+
+  .card-text .card-date {
+    background: none;
+    padding: 0;
+    margin: 0 0 0.3rem;
+    color: var(--text-dim);
+  }
+
+  .card-text .card-title { text-shadow: none; }
+
+  /* ---- Featured card ---- */
+
+  #featured { margin-bottom: 2rem; }
+
+  .featured-card {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 1rem;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 8px;
+    padding: 0.9rem;
+  }
+
+  .featured-card.no-image { grid-template-columns: 1fr; }
+
+  .featured-card img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .featured-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 0 0 0.3rem;
+  }
+
+  .featured-title { font-weight: 600; font-size: 1rem; line-height: 1.3; margin: 0 0 0.3rem; }
+  .featured-text { font-size: 0.85rem; line-height: 1.45; color: var(--text-dim); margin: 0 0 0.7rem; }
+
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .btn:hover, .btn:focus-visible { border-color: rgba(255,255,255,0.4); }
+  .btn-primary:hover, .btn-primary:focus-visible { background: #fff; }
+  .btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+  /* ---- Coming up ---- */
+
+  #coming-up { margin-bottom: 2rem; scroll-margin-top: 1.5rem; }
+
+  .events { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+
+  .event {
+    display: grid;
+    grid-template-columns: 4.2rem 1fr;
+    gap: 0.9rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 0.9rem;
+  }
+
+  .event-day { text-align: center; line-height: 1.1; padding-top: 0.1rem; }
+  .event-month { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--red); }
+  .event-date { font-size: 1.6rem; font-weight: 700; }
+  .event-weekday { font-size: 0.7rem; color: var(--text-dim); }
+
+  .event-title { font-weight: 600; font-size: 0.95rem; line-height: 1.3; margin: 0 0 0.25rem; }
+  .event-meta { font-size: 0.8rem; line-height: 1.45; color: var(--text-dim); margin: 0 0 0.6rem; }
+  .event-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
   /* ---- Empty state ---- */
 
   .empty-state {
@@ -255,8 +349,14 @@
 
   footer a { color: inherit; }
 
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .pill, .card-photo-wrap img, .socials a { transition: none; }
+    html { scroll-behavior: auto; }
   }
 
   /* ---- Desktop: sidebar layout ---- */
@@ -292,6 +392,7 @@
     }
 
     .links-row .pill {
+      flex: none;
       white-space: normal;
       text-align: left;
       padding: 0.75rem 1.1rem;
@@ -330,12 +431,18 @@
 
       <nav class="links links-row" aria-label="Quick links">
         <a class="pill" href="https://rosalux.nyc/" target="_blank" rel="noopener">Website →</a>
-        <a class="pill" href="https://rosalux.nyc/events/" target="_blank" rel="noopener">Events</a>
-        <a class="pill" href="https://us.macmillan.com/books/9780374298432/fromlifeitself/" target="_blank" rel="noopener">Buy the Book</a>
+        <a class="pill" id="events-pill" href="#coming-up">Events</a>
       </nav>
     </aside>
 
     <div class="content">
+      <section id="featured" hidden aria-label="Featured"></section>
+
+      <section id="coming-up" hidden aria-labelledby="coming-up-label">
+        <div class="section-label" id="coming-up-label">Coming up</div>
+        <ol class="events" id="events"></ol>
+      </section>
+
       <div class="section-label">Recent Articles</div>
 
       <div id="grid"></div>
@@ -364,11 +471,11 @@
     return `
       <a class="card" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">
         <div class="card-photo-wrap">
-          <img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.title)}" loading="${isEager ? 'eager' : 'lazy'}" decoding="async" onerror="this.remove()">
-          <div class="card-scrim">
-            <span class="card-date">${escapeHtml(formatDate(item.date))}</span>
-            <p class="card-title">${escapeHtml(item.title)}</p>
-          </div>
+          <img src="${escapeAttr(item.image)}" alt="" loading="${isEager ? 'eager' : 'lazy'}" decoding="async" onerror="this.remove()">
+        </div>
+        <div class="card-text">
+          <span class="card-date">${escapeHtml(formatDate(item.date))}</span>
+          <p class="card-title">${escapeHtml(item.title)}</p>
         </div>
       </a>
     `;
@@ -410,6 +517,134 @@
     return (str ?? '').replace(/"/g, '&quot;');
   }
 
+  // ---- Featured: one thing we're pushing, with its own button and an end date (featured.json) ----
+
+  function todayET() {
+    return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date());
+  }
+
+  async function loadFeatured() {
+    const box = document.getElementById('featured');
+    try {
+      const r = await fetch('./featured.json', { cache: 'no-store' });
+      if (!r.ok) return;
+      const items = (await r.json()).filter(i => i && i.url && (!i.until || i.until >= todayET()));
+      if (!items.length) return;
+      const i = items[0];
+      box.innerHTML = `
+        <div class="featured-card${i.image ? '' : ' no-image'}">
+          ${i.image ? `<img src="${escapeAttr(i.image)}" alt="" loading="eager" onerror="this.remove()">` : ''}
+          <div>
+            <p class="featured-label">${escapeHtml(i.label || 'Featured')}</p>
+            <p class="featured-title">${escapeHtml(i.title)}</p>
+            ${i.text ? `<p class="featured-text">${escapeHtml(i.text)}</p>` : ''}
+            <a class="btn btn-primary" href="${escapeAttr(i.url)}" target="_blank" rel="noopener">${escapeHtml(i.button || 'Find out more')}</a>
+          </div>
+        </div>`;
+      box.hidden = false;
+    } catch (e) { /* no Featured card */ }
+  }
+
+  // ---- Coming up: live from rosalux.nyc's event API, plus our own list (events.json) ----
+
+  const RSVP_PATTERN = /eventbrite\.|zoom\.us\/(webinar|meeting)\/register|forms\.gle|docs\.google\.com\/forms|lu\.ma\/|bit\.ly\/|actionnetwork\.org|mobilize\.us|tickets|regist|rsvp/i;
+
+  function decodeEntities(str) {
+    const t = document.createElement('textarea');
+    t.innerHTML = str || '';
+    return t.value;
+  }
+
+  function firstRsvpLink(html) {
+    const links = [...(html || '').matchAll(/href="([^"]+)"/g)].map(m => m[1]);
+    return links.find(l => RSVP_PATTERN.test(l) && !/rosalux\.nyc\/wp-content/.test(l)) || '';
+  }
+
+  function fromWebsite(e) {
+    const a = e.acf || {};
+    const start = (a.start_date_time || '').replace(' ', 'T').slice(0, 16);
+    return {
+      title: decodeEntities(e.title && e.title.rendered),
+      start,
+      place: a.location || '',
+      rsvp: firstRsvpLink(e.content && e.content.rendered),
+      info: e.link || '',
+    };
+  }
+
+  function sameEvent(a, b) {
+    const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    return a.start.slice(0, 10) === b.start.slice(0, 10) &&
+      (norm(a.title).includes(norm(b.title)) || norm(b.title).includes(norm(a.title)));
+  }
+
+  function eventParts(start) {
+    const [d, t] = start.split('T');
+    const date = new Date(d + 'T12:00:00');
+    const month = date.toLocaleDateString('en-US', { month: 'short' });
+    const day = date.getDate();
+    const weekday = date.toLocaleDateString('en-US', { weekday: 'short' });
+    let time = '';
+    if (t && t !== '00:00') {
+      const [h, m] = t.split(':').map(Number);
+      const h12 = ((h + 11) % 12) + 1;
+      time = `${h12}${m ? ':' + String(m).padStart(2, '0') : ''} ${h < 12 ? 'am' : 'pm'} ET`;
+    }
+    return { month, day, weekday, time };
+  }
+
+  function eventHTML(e) {
+    const p = eventParts(e.start);
+    const meta = [p.time, e.place, e.with].filter(Boolean).map(escapeHtml).join(' · ');
+    const actions = [
+      e.rsvp ? `<a class="btn btn-primary" href="${escapeAttr(e.rsvp)}" target="_blank" rel="noopener">RSVP</a>` : '',
+      e.info ? `<a class="btn" href="${escapeAttr(e.info)}" target="_blank" rel="noopener">More info</a>` : '',
+    ].join('');
+    return `
+      <li class="event">
+        <div class="event-day" aria-hidden="true">
+          <div class="event-month">${escapeHtml(p.month)}</div>
+          <div class="event-date">${p.day}</div>
+          <div class="event-weekday">${escapeHtml(p.weekday)}</div>
+        </div>
+        <div>
+          <p class="event-title">${escapeHtml(e.title)}</p>
+          <p class="event-meta"><span class="visually-hidden">${escapeHtml(p.weekday + ' ' + p.month + ' ' + p.day)} · </span>${meta}</p>
+          ${actions ? `<div class="event-actions">${actions}</div>` : ''}
+        </div>
+      </li>`;
+  }
+
+  async function loadEvents() {
+    const section = document.getElementById('coming-up');
+    const pill = document.getElementById('events-pill');
+    const today = todayET();
+    let ours = [], site = [];
+    try {
+      const r = await fetch('./events.json', { cache: 'no-store' });
+      if (r.ok) ours = await r.json();
+    } catch (e) {}
+    try {
+      const r = await fetch('https://rosalux.nyc/wp-json/wp/v2/event?per_page=20&_fields=title,link,acf,content', { cache: 'no-store' });
+      if (r.ok) site = (await r.json()).map(fromWebsite);
+    } catch (e) {}
+    const merged = [...ours];
+    for (const e of site) if (!merged.some(o => sameEvent(o, e))) merged.push(e);
+    const upcoming = merged
+      .filter(e => e && e.title && e.start && e.start.slice(0, 10) >= today)
+      .sort((a, b) => a.start.localeCompare(b.start));
+    if (!upcoming.length) {
+      pill.href = 'https://rosalux.nyc/events/';
+      pill.target = '_blank';
+      pill.rel = 'noopener';
+      return;
+    }
+    document.getElementById('events').innerHTML = upcoming.map(eventHTML).join('');
+    section.hidden = false;
+  }
+
+  loadFeatured();
+  loadEvents();
   loadGrid();
 </script>
 
