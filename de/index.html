@@ -136,6 +136,15 @@
 
   .pill:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
+  .pill[hidden] { display: none; }
+
+  .more-button {
+    width: 100%;
+    margin-top: 0.75rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
   /* ---- Section label ---- */
 
   .section-label {
@@ -226,6 +235,19 @@
     overflow: hidden;
   }
 
+  .card-text {
+    padding: clamp(0.55rem, 2.6cqi, 0.75rem);
+  }
+
+  .card-text .card-date {
+    background: none;
+    padding: 0;
+    margin: 0 0 0.3rem;
+    color: var(--text-dim);
+  }
+
+  .card-text .card-title { text-shadow: none; }
+
   /* ---- Empty state ---- */
 
   .empty-state {
@@ -313,8 +335,8 @@
         <h1 class="org-name">Guten Morgen Amerika</h1>
         <p class="org-tagline">Das New Yorker Büro der Rosa-Luxemburg-Stiftung, auf Deutsch. Unsere Themen: die USA und Kanada, die Vereinten Nationen und Perspektiven aus dem Globalen Süden.</p>
         <nav class="socials" aria-label="Kanäle">
-          <a href="https://twitter.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="X (Twitter)">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.6L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg>
+          <a href="https://bsky.app/profile/did:plc:cmcndi6ltk66lpso5mlo2cp2" target="_blank" rel="noopener" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
           </a>
           <a href="https://www.facebook.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="Facebook">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.5H16l.4-3.1h-2.9V8.4c0-.9.3-1.6 1.7-1.6h1.8V4c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.9H7.4v3.1H10V22h3.5z"/></svg>
@@ -338,6 +360,7 @@
       <div class="section-label">Neueste Artikel</div>
 
       <div id="grid"></div>
+      <button class="pill more-button" id="more-articles" type="button" hidden>Mehr anzeigen</button>
 
       <nav class="links" aria-label="Weitere Links" style="padding-top: 1.5rem;">
         <a class="pill" href="https://rosalux.nyc/resources/" target="_blank" rel="noopener">Alle Artikel und Publikationen (Englisch)</a>
@@ -363,11 +386,11 @@
     return `
       <a class="card" href="${escapeAttr(item.url)}" target="_blank" rel="noopener">
         <div class="card-photo-wrap">
-          <img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.title)}" loading="${isEager ? 'eager' : 'lazy'}" decoding="async" onerror="this.remove()">
-          <div class="card-scrim">
-            <span class="card-date">${escapeHtml(formatDate(item.date))}</span>
-            <p class="card-title">${escapeHtml(item.title)}</p>
-          </div>
+          <img src="${escapeAttr(item.image)}" alt="" loading="${isEager ? 'eager' : 'lazy'}" decoding="async" onerror="this.remove()">
+        </div>
+        <div class="card-text">
+          <span class="card-date">${escapeHtml(formatDate(item.date))}</span>
+          <p class="card-title">${escapeHtml(item.title)}</p>
         </div>
       </a>
     `;
@@ -385,11 +408,27 @@
         return;
       }
 
-      grid.innerHTML = items.map((item, i) => cardHTML(item, i < 2)).join('');
+      articles = items;
+      showMore();
     } catch (err) {
       renderEmptyState(grid);
     }
   }
+
+  // Sechs auf einmal: zwei Reihen am Desktop (drei nebeneinander), drei am Handy (zwei nebeneinander).
+  const PAGE = 6;
+  let articles = [];
+  let shown = 0;
+
+  function showMore() {
+    const grid = document.getElementById('grid');
+    const next = articles.slice(shown, shown + PAGE);
+    grid.insertAdjacentHTML('beforeend', next.map((item, i) => cardHTML(item, shown + i < 2)).join(''));
+    shown += next.length;
+    document.getElementById('more-articles').hidden = shown >= articles.length;
+  }
+
+  document.getElementById('more-articles').addEventListener('click', showMore);
 
   function renderEmptyState(grid) {
     grid.outerHTML = `

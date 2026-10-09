@@ -138,6 +138,8 @@
 
   .pill:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
+  .pill[hidden] { display: none; }
+
   /* ---- Section label ---- */
 
   .section-label {
@@ -320,6 +322,43 @@
   .event-meta { font-size: 0.8rem; line-height: 1.45; color: var(--text-dim); margin: 0 0 0.6rem; }
   .event-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
+  /* ---- Books ---- */
+
+  #books { margin: 2rem 0 0; }
+
+  .more-button {
+    width: 100%;
+    margin-top: 0.75rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .books { display: grid; gap: 0.5rem; }
+
+  .book {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 0.9rem;
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 0.9rem;
+  }
+
+  .book img {
+    width: 84px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 2px;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  }
+
+  .book-title { font-weight: 600; font-size: 0.95rem; line-height: 1.3; margin: 0 0 0.2rem; }
+  .book-subtitle { font-size: 0.82rem; line-height: 1.35; color: var(--text); margin: 0 0 0.35rem; font-style: italic; }
+  .book-meta { font-size: 0.8rem; line-height: 1.45; color: var(--text-dim); margin: 0 0 0.6rem; }
+
   /* ---- Empty state ---- */
 
   .empty-state {
@@ -400,6 +439,7 @@
     }
 
     #grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+    .books { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -414,14 +454,17 @@
         <h1 class="org-name">Rosa Lux NYC</h1>
         <p class="org-tagline">New York Office of Rosa Luxemburg Stiftung, focusing on the US and Canada, the United Nations, and Global South perspectives.</p>
         <nav class="socials" aria-label="Social channels">
-          <a href="https://twitter.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="X (Twitter)">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.6L18.9 2zm-1.2 18h1.7L7.4 4H5.6l12.1 16z"/></svg>
+          <a href="https://bsky.app/profile/rosalux.nyc" target="_blank" rel="noopener" aria-label="Bluesky">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>
           </a>
           <a href="https://www.facebook.com/rosaluxnyc" target="_blank" rel="noopener" aria-label="Facebook">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.5H16l.4-3.1h-2.9V8.4c0-.9.3-1.6 1.7-1.6h1.8V4c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.9H7.4v3.1H10V22h3.5z"/></svg>
           </a>
           <a href="https://www.instagram.com/rosaluxnyc/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c2.7 0 3 0 4 .05 1 .05 1.7.2 2.3.5.6.2 1.1.6 1.6 1.1.5.5.8 1 1.1 1.6.2.6.4 1.3.5 2.3.05 1 .05 1.3.05 4s0 3-.05 4c-.05 1-.2 1.7-.5 2.3-.2.6-.6 1.1-1.1 1.6-.5.5-1 .8-1.6 1.1-.6.2-1.3.4-2.3.5-1 .05-1.3.05-4 .05s-3 0-4-.05c-1-.05-1.7-.2-2.3-.5-.6-.2-1.1-.6-1.6-1.1-.5-.5-.8-1-1.1-1.6-.2-.6-.4-1.3-.5-2.3-.05-1-.05-1.3-.05-4s0-3 .05-4c.05-1 .2-1.7.5-2.3.2-.6.6-1.1 1.1-1.6.5-.5 1-.8 1.6-1.1.6-.2 1.3-.4 2.3-.5 1-.05 1.3-.05 4-.05zm0 1.8c-2.6 0-2.9 0-4 .05-.8.04-1.3.16-1.6.28-.4.15-.7.34-1 .63-.3.3-.48.6-.63 1-.12.3-.24.8-.28 1.6-.05 1.1-.05 1.4-.05 4s0 2.9.05 4c.04.8.16 1.3.28 1.6.15.4.34.7.63 1 .3.3.6.48 1 .63.3.12.8.24 1.6.28 1.1.05 1.4.05 4 .05s2.9 0 4-.05c.8-.04 1.3-.16 1.6-.28.4-.15.7-.34 1-.63.3-.3.48-.6.63-1 .12-.3.24-.8.28-1.6.05-1.1.05-1.4.05-4s0-2.9-.05-4c-.04-.8-.16-1.3-.28-1.6-.15-.4-.34-.7-.63-1-.3-.3-.6-.48-1-.63-.3-.12-.8-.24-1.6-.28-1.1-.05-1.4-.05-4-.05zm0 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.8a2.7 2.7 0 100 5.4 2.7 2.7 0 000-5.4zm4.7-2a1.05 1.05 0 110 2.1 1.05 1.05 0 010-2.1z"/></svg>
+          </a>
+          <a href="https://rosaluxnyc.substack.com/" target="_blank" rel="noopener" aria-label="Substack">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
           </a>
           <a href="https://www.youtube.com/c/rosaluxnyc" target="_blank" rel="noopener" aria-label="YouTube">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 6.2a2.8 2.8 0 00-2-2C18.7 3.7 12 3.7 12 3.7s-6.7 0-8.5.5a2.8 2.8 0 00-2 2A29 29 0 001 12a29 29 0 00.5 5.8 2.8 2.8 0 002 2c1.8.5 8.5.5 8.5.5s6.7 0 8.5-.5a2.8 2.8 0 002-2A29 29 0 0023 12a29 29 0 00-.5-5.8zM9.8 15.5V8.5l6 3.5-6 3.5z"/></svg>
@@ -431,7 +474,7 @@
 
       <nav class="links links-row" aria-label="Quick links">
         <a class="pill" href="https://rosalux.nyc/" target="_blank" rel="noopener">Website →</a>
-        <a class="pill" id="events-pill" href="#coming-up">Events</a>
+        <a class="pill" id="events-pill" href="https://rosalux.nyc/events/" target="_blank" rel="noopener" hidden>Events</a>
       </nav>
     </aside>
 
@@ -446,6 +489,13 @@
       <div class="section-label">Recent Articles</div>
 
       <div id="grid"></div>
+      <button class="pill more-button" id="more-articles" type="button" hidden>Show more</button>
+
+      <section id="books" hidden aria-labelledby="books-label">
+        <div class="section-label" id="books-label">Books</div>
+        <div class="books" id="book-list"></div>
+      </section>
+
 
       <nav class="links" aria-label="More links" style="padding-top: 1.5rem;">
         <a class="pill" href="https://rosalux.nyc/resources/" target="_blank" rel="noopener">All Articles, Publications &amp; Multimedia</a>
@@ -493,11 +543,27 @@
         return;
       }
 
-      grid.innerHTML = items.map((item, i) => cardHTML(item, i < 2)).join('');
+      articles = items;
+      showMore();
     } catch (err) {
       renderEmptyState(grid);
     }
   }
+
+  // Six at a time: fills two rows on desktop (three across) and three on a phone (two across).
+  const PAGE = 6;
+  let articles = [];
+  let shown = 0;
+
+  function showMore() {
+    const grid = document.getElementById('grid');
+    const next = articles.slice(shown, shown + PAGE);
+    grid.insertAdjacentHTML('beforeend', next.map((item, i) => cardHTML(item, shown + i < 2)).join(''));
+    shown += next.length;
+    document.getElementById('more-articles').hidden = shown >= articles.length;
+  }
+
+  document.getElementById('more-articles').addEventListener('click', showMore);
 
   function renderEmptyState(grid) {
     grid.outerHTML = `
@@ -634,16 +700,38 @@
       .filter(e => e && e.title && e.start && e.start.slice(0, 10) >= today)
       .sort((a, b) => a.start.localeCompare(b.start));
     if (!upcoming.length) {
-      pill.href = 'https://rosalux.nyc/events/';
-      pill.target = '_blank';
-      pill.rel = 'noopener';
+      pill.hidden = false;   // nothing coming up: the button leads to the website's event page instead
       return;
     }
     document.getElementById('events').innerHTML = upcoming.map(eventHTML).join('');
     section.hidden = false;
   }
 
+  // ---- Books: books the office helped make (books.json), newest first ----
+
+  async function loadBooks() {
+    try {
+      const r = await fetch('./books.json', { cache: 'no-store' });
+      if (!r.ok) return;
+      const books = (await r.json()).filter(b => b && b.title && b.url);
+      if (!books.length) return;
+      document.getElementById('book-list').innerHTML = books.map(b => `
+        <div class="book">
+          ${b.cover ? `<img src="${escapeAttr(b.cover)}" alt="Cover of ${escapeAttr(b.title)}" loading="lazy" onerror="this.remove()">` : '<span></span>'}
+          <div>
+            <p class="book-title">${escapeHtml(b.title)}</p>
+            ${b.subtitle ? `<p class="book-subtitle">${escapeHtml(b.subtitle)}</p>` : ''}
+            <p class="book-meta">${[b.author, b.publisher, b.note].filter(Boolean).map(escapeHtml).join(' · ')}</p>
+            <a class="btn btn-primary" href="${escapeAttr(b.url)}" target="_blank" rel="noopener">${escapeHtml(b.button || 'Get the book')}</a>
+            ${b.more ? `<a class="btn" href="${escapeAttr(b.more)}" target="_blank" rel="noopener">${escapeHtml(b.more_label || 'More')}</a>` : ''}
+          </div>
+        </div>`).join('');
+      document.getElementById('books').hidden = false;
+    } catch (e) { /* no books section */ }
+  }
+
   loadFeatured();
+  loadBooks();
   loadEvents();
   loadGrid();
 </script>
